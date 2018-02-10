@@ -115,5 +115,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# For using ROS
 source /opt/ros/kinetic/setup.bash
-source catkin_ws/setup.bash # I think this is necessary for ROS catkin workspaces
+
+# Start up tmux automatically
+if command -v tmux>/dev/null; then
+	  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+  fi

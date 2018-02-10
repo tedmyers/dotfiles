@@ -118,7 +118,3 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
    end
 endfunction
 :autocmd FileType vimwiki map <leader>c :call ToggleCalendar()
-"vimwiki-option-auto_export = 1    "Generate HTML when page saved
-"vimwiki-option-auto_toc = 1       "Update TOC when page saved
-"vimwiki-option-maxhi = 1          "Highlight broken wiki links
-"vimwiki-option-auto_tags = 1      "Tag metadata updated on each save
