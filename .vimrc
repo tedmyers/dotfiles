@@ -5,29 +5,21 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
+"alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'	" Helpful for Git commands
-Plugin 'scrooloose/nerdtree' " NERDTree
-Plugin 'ctrlpvim/ctrlp.vim' " Ctrl P
+Plugin 'tpope/vim-fugitive'      " Helpful for Git commands
+Plugin 'scrooloose/nerdtree'     " NERDTree
+Plugin 'ctrlpvim/ctrlp.vim'      " Ctrl P
 Plugin 'vim-airline/vim-airline' " nice status/tabline
-Plugin 'vimwiki/vimwiki'
-Plugin 'mattn/calendar-vim'
+Plugin 'vimwiki/vimwiki'         " useful for thought organizing/notetaking
+Plugin 'mattn/calendar-vim'      " calendar for vimwiki
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" map Shift-Enter as escape
-"nnoremap <S-cr> <esc>
-"vnoremap <S-cr> <esc>
-"xnoremap <S-cr> <esc>
-"inoremap <S-cr> <esc>
-"onoremap <S-cr> <esc>
-"cnoremap <S-cr> <esc>
 
 " basic options
 set autoindent                 "use indentation of previous line
@@ -51,7 +43,6 @@ set hlsearch incsearch         "highlight as we go
 set history=1000               "keep a longer ex history
 set undoreload=1000            "keep a longer undo history
 set backspace=indent,eol,start "let insert mode backspace be useful
-" set showbreak=↪                "put at the start of wrapped lines
 set colorcolumn=+1             "highilight the column after the textwidth value
 set nrformats=octal,hex,alpha  "make ^x and ^a intelligent
 set scrolloff=10               "keep at least 10 lines above/below cursor
@@ -93,21 +84,23 @@ if !isdirectory(expand(&directory))
 endif
 
 " Start NERDTree when vim starts, even with no files
- autocmd vimenter * NERDTree
- autocmd StdinReadPre * let s:std_in=1
- autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let NERDTreeShowHidden=1        "Show hidden files by default
 let NERDTreeDirArrows=1         "Use fancy characters
 let NERDTreeAutoDeleteBuffer=1  "Delete buffers invalidate by move/rename/delete
 let NERDTreeRespectWildIgnore=0 "Respect wildignore settings
 
-
 " vimwiki stuff "
 " Run multiple wikis "
 let g:vimwiki_list = [
- \{'path': '~/Documents/VimWiki/personal.wiki'},
- \{'path': '~/Documents/VimWiki/tech.wiki'}
+ \{'path': '~/Documents/VimWiki/personal.wiki',
+ \'auto_export': '1',
+ \'auto_toc': '1',
+ \'maxhi': '1',
+ \'auto_tags': '1'},
  \]
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
  :autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote
@@ -124,4 +117,8 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
     let g:calendar_open = 1
    end
 endfunction
-:autocmd FileType vimwiki map c :call ToggleCalendar()
+:autocmd FileType vimwiki map <leader>c :call ToggleCalendar()
+"vimwiki-option-auto_export = 1    "Generate HTML when page saved
+"vimwiki-option-auto_toc = 1       "Update TOC when page saved
+"vimwiki-option-maxhi = 1          "Highlight broken wiki links
+"vimwiki-option-auto_tags = 1      "Tag metadata updated on each save
