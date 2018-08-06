@@ -67,21 +67,21 @@ set wrap
 set textwidth=110
 
 " Back ups
-set backup                       " enable backups
-set undodir=~/.vim/tmp/undo/     " undo files
-set backupdir=~/.vim/tmp/backup/ " backups
-set directory=~/.vim/tmp/swap/   " swap files
+"set backup                       " enable backups
+"set undodir=~/.vim/tmp/undo/     " undo files
+"set backupdir=~/.vim/tmp/backup/ " backups
+"set directory=~/.vim/tmp/swap/   " swap files
 
 " Make those folders automatically if they don't already exist.
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
-if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
-endif
+"if !isdirectory(expand(&undodir))
+"    call mkdir(expand(&undodir), "p")
+"endif
+"if !isdirectory(expand(&backupdir))
+"    call mkdir(expand(&backupdir), "p")
+"endif
+"if !isdirectory(expand(&directory))
+"    call mkdir(expand(&directory), "p")
+"endif
 
 " Start NERDTree when vim starts, even with no files
 autocmd vimenter * NERDTree
@@ -96,12 +96,13 @@ let NERDTreeRespectWildIgnore=0 "Respect wildignore settings
 " vimwiki stuff "
 " Run multiple wikis "
 let g:vimwiki_list = [
- \{'path': '~/Documents/VimWiki/personal.wiki',
+ \{'path': '~/Google Drive/VimWiki/personal.wiki',
  \'auto_export': '1',
  \'auto_toc': '1',
  \'maxhi': '1',
  \'auto_tags': '1'},
  \]
+
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
  :autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote
  function! ToggleCalendar()
